@@ -16,19 +16,20 @@ var assertFileExists = function(infile) {
 }
 
 var cheerioHtmlFile = function(htmlfile) {
-	return cheerio.load(fs.readyFileSync(htmlfile));
+	return cheerio.load(fs.readFileSync(htmlfile));
 }
 
 var loadChecks =function(checksfile) {
-	return JSON.parse(fs.readyFileSync(htmlfile));
+	return JSON.parse(fs.readFileSync(checksfile));
 }
 
 var checkHtmlFile = function( htmlfile, checksfile) {
 	$ = cheerioHtmlFile(htmlfile);
 	var checks = loadChecks(checksfile).sort();
+	console.log(checks);
 	var out = {};
 	for (var ii in checks) {
-		var present = $checks[ii].length >0;
+		var present = checks[ii].length >0;
 		out[checks[ii]] = present;
 	}
 
